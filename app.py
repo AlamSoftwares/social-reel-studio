@@ -311,3 +311,19 @@ with tab3:
                     st.markdown("**Instagram / Facebook SEO & Tags:**")
                     st.text_area(f"IG Caption #{item['day']}", value=f"{item['seo_keywords']['ig_caption']}\n\n{item['seo_keywords']['ig_high_reach_hashtags']} {item['seo_keywords']['ig_niche_hashtags']}", height=120)
                 st.markdown("---")
+
+import time
+genai.configure(api_key=api_key)
+model = genai.GenerativeModel("gemini-3.8-flash")
+
+# Automatic retry if free tier asks to wait 10 seconds
+res = None
+for attempt in range(3):
+    try:
+        res = model.generate_content(prompt)
+        break
+    except Exception as err:
+        if "429" in str(err) and attempt < 2:
+            time.sleep(11)
+        else:
+            raise err
