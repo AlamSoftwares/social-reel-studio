@@ -129,7 +129,7 @@ with tab1:
                     pdf_content = "".join([page.extract_text() or "" for page in reader.pages])
 
                     genai.configure(api_key=api_key)
-                    model = genai.GenerativeModel("gemini-2.0-flash")
+                    model = genai.GenerativeModel("gemini-3.8-flash")
 
                     prompt = f"""
 You are a world-class Senior Social Media Director and YouTube/Meta Algorithm Strategist with 10+ years optimizing short-form virality.
